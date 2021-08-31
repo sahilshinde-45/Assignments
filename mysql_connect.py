@@ -1,6 +1,6 @@
 import mysql
 import mysql.connector as msql
-import sqlalchemy
+
 from mysql.connector import Error
 
 from main import employee_data
