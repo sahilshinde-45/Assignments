@@ -1,15 +1,15 @@
 import psycopg2
 
 
-class conn_pg():
+class conn_pg:
     def __init__(self, host, database, user, password):
         self.host = host
         self.database = database
         self.user = user
         self.password = password
-        self.connection = psycopg2.connect(host='localhost', database='employee', user='postgres',
-                                           password='Neosoft$22')
-        self.cur = 0
+        self.connection = psycopg2.connect(host='localhost', user='postgres', password='Neosoft$22', database='Book_store')
+
+        self.cur=0
 
     def createCursor(self):
         self.cur = self.connection.cursor()
@@ -27,10 +27,13 @@ class conn_pg():
         self.table_name = table_name
         return table_name
 
-    def pushData(self, pT, table_name):
+    def pushData(self,pT,table_name):
         for row in pT:
-            self.cur.execute("insert into {} values {}".format(table_name, tuple(row)))
+            self.cur.execute("""insert into {} values {}""".format(table_name,tuple(row)))
+
+
 
     def closeConn(self):
+
         self.cur.close()
         self.connection.commit()

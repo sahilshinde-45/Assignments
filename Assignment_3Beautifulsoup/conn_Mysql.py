@@ -1,14 +1,14 @@
-import psycopg2
+import mysql.connector
 
 
-class conn_pg():
+class conn_Mysql:
     def __init__(self, host, database, user, password):
         self.host = host
         self.database = database
         self.user = user
         self.password = password
-        self.connection = psycopg2.connect(host='localhost', database='employee', user='postgres',
-                                           password='Neosoft$22')
+        self.connection = mysql.connector.connect(host='localhost', database='employee', user='root',
+                                                  password='Neosoft$22')
         self.cur = 0
 
     def createCursor(self):
@@ -29,7 +29,7 @@ class conn_pg():
 
     def pushData(self, pT, table_name):
         for row in pT:
-            self.cur.execute("insert into {} values {}".format(table_name, tuple(row)))
+            self.cur.execute("""insert into {} values {}""".format(table_name, tuple(row)))
 
     def closeConn(self):
         self.cur.close()

@@ -1,10 +1,10 @@
 
 import books
-import Con_sql
+import conn_Mysql
 import conn_postgress
 import psycopg2
 
-mysql_object = Con_sql.Mysql('localhost','book_store','root','Neosoft$22')
+mysql_object = conn_Mysql.Mysql('localhost', 'book_store', 'root', 'Neosoft$22')
 post_object = conn_postgress.poconn('localhost','Book_store','postgres','Neosoft$22')
 post_object = conn_postgress.poconn('localhost','Book_store','postgres','Neosoft$22')
 

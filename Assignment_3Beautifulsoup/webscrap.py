@@ -30,18 +30,18 @@ warranty = []
 
 for i in range(0, len(commonclass)):
     p = commonclass[i].text  # Extracting the text from the tags
-    if ("Core" in p):
+    if "Core" in p:
         processors.append(p)
-    elif ("RAM" in p):
+    elif "RAM" in p:
         ram.append(p)
     # If RAM is present in the text then append it to the ram list. Similarly do this for the other features as well
-    elif ("HDD" in p or "SSD" in p):
+    elif "HDD" in p or "SSD" in p:
         storage.append(p)
-    elif ("Operating" in p):
+    elif "Operating" in p:
         os.append(p)
-    elif ("Display" in p):
+    elif "Display" in p:
         inches.append(p)
-    elif ("Warranty" in p):
+    elif "Warranty" in p:
         warranty.append(p)
 
 print(len(processors))
@@ -64,14 +64,14 @@ for i in range(len(rating)):
 ratings
 len(ratings)
 
-
-d = {'Description':description,'Processor':processors,'RAM':ram,'Operating System':os,'Storage':storage,'Display':inches,'Warranty':warranty,'Price':prices}
-dataset = pd.DataFrame.from_dict(d, orient='index')# Finally merging all the features into a single dataframe
+d = {'Description': description, 'Processor': processors, 'RAM': ram, 'Operating System': os, 'Storage': storage,
+     'Display': inches, 'Warranty': warranty, 'Price': prices}
+dataset = pd.DataFrame.from_dict(d, orient='index')  # Finally merging all the features into a single dataframe
+# orient{‘columns’, ‘index’}, default ‘columns’
+'''The “orientation” of the data. If the keys of the passed dict should be the columns of the resulting DataFrame, pass ‘columns’ (default). Otherwise if the keys should be rows, pass ‘index’.'''
 print(dataset)
-dataset=dataset.transpose()
-
+dataset = dataset.transpose()
 
 dataset.to_csv('laptop.csv')
 df = pd.read_csv('laptop.csv')
-df.shape
-
+df.shape  # Return a tuple representing the dimensionality of the DataFrame.
