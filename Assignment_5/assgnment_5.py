@@ -1,11 +1,11 @@
-import conn_postgress
-import fileclass
-import con_sql
+import conn_pg
+import parse
+import conn_Mysql
 
-pg_obj = conn_postgress.poconn('localhost', 'Book_store', 'root', 'Neosft$22')
-sql_obj = con_sql.Mysql('localhost', 'book_store', 'root', 'Neosoft$22')
+pg_obj = conn_pg.conn_pg('localhost', 'Book_store', 'root', 'Neosft$22')
+sql_obj = conn_Mysql.conn_Mysql('localhost', 'book_store', 'root', 'Neosoft$22')
 
-fileobj = fileclass.files('author.csv')
+fileobj = parse.Parse('author.csv')
 
 # postgress
 '''
@@ -21,12 +21,19 @@ fileobj.closefile()
 '''
 
 # sql
+value1= fileobj.value
+header= fileobj.header
 cur = sql_obj.createCursor()
-sql_obj.fetchtable('author')
-fetched_table = sql_obj.fetchData('author')
+sql_obj.getTable('author')
+fetched_table = sql_obj.pushData('author',value1)
 fileobj.writefile('author.csv', 'w')
 csv_writer = fileobj.writeTableToCsv()
 csv_writer.writerow([col[0] for col in cur.description])
 for row in fetched_table:
     csv_writer.writerow(row)
-fileobj.closefile()
+sql_obj.closeConn()
+
+print('REcords created successfully')
+
+
+
